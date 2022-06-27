@@ -16,3 +16,7 @@
 .envrc
 
 .DS_Store
+
+dist/
+
+*.key
