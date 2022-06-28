@@ -55,8 +55,8 @@ changelog:
 project_name: traverse
 dockers:
   - image_templates:
-      - 'ghcr.io/vmware-tanzu-labs/traverse:v{{ .Version }}'
-      - 'ghcr.io/vmware-tanzu-labs/traverse:latest'
+      - 'ghcr.io/{{ .Env.GITHUB_REPOSITORY }}:v{{ .Version }}'
+      - 'ghcr.io/{{ .Env.GITHUB_REPOSITORY }}:latest'
     dockerfile: Dockerfile
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -79,7 +79,7 @@ brews:
     # Defaults are shown.
     commit_author:
       name: goreleaserbot
-      email: goreleaser@example.com
+      email: bot@goreleaser.com
 
     # Folder inside the repository to put the formula.
     # Default is the root folder.
