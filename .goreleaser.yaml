@@ -32,7 +32,7 @@ archives:
       windows: Windows
       386: i386
       amd64: x86_64
-    name_template: "traverse_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    name_template: "traverse_v{{ tolower .Version }}_{{ tolower .Os }}_{{ tolower .Arch }}"
     format_overrides:
       - goos: windows
         format: zip
@@ -40,9 +40,9 @@ archives:
       - README.md
       - LICENSE
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
-  name_template: "{{ .Version }}-snapshot-{{.ShortCommit}}"
+  name_template: "{{ tolower .Version }}-snapshot-{{.ShortCommit}}"
 changelog:
   sort: asc
   filters:
@@ -55,8 +55,8 @@ changelog:
 project_name: traverse
 dockers:
   - image_templates:
-      - 'ghcr.io/{{ .Env.GITHUB_REPOSITORY }}:v{{ .Version }}'
-      - 'ghcr.io/{{ .Env.GITHUB_REPOSITORY }}:latest'
+      - "ghcr.io/{{ .Env.GITHUB_REPOSITORY }}:v{{ tolower .Version }}"
+      - "ghcr.io/{{ .Env.GITHUB_REPOSITORY }}:latest"
     dockerfile: Dockerfile
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -71,7 +71,7 @@ brews:
   - name: traverse
 
     tap:
-      owner: mikfreedman
+      owner: joefitzgerald
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
 
@@ -95,7 +95,7 @@ brews:
 
     # SPDX identifier of your app's license.
     # Default is empty.
-    license: "MIT"
+    license: "Apache-2.0"
 
     # Setting this will prevent goreleaser to actually try to commit the updated
     # formula - instead, the formula file will be stored on the dist folder only,
@@ -112,11 +112,11 @@ brews:
     test: |
       system "#{bin}/traverse --version"
 nfpms:
-  - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-    homepage:  https://github.com/joefitzgerald/traverse
+  - file_name_template: "{{ tolower .ProjectName }}_{{ tolower .Arch }}{{ if .Arm }}v{{ tolower .Arm }}{{ end }}"
+    homepage: https://github.com/joefitzgerald/traverse
     description: "Build and maintain groups on the basis of reporting hierarchy."
-    maintainer: Joe Fitzgerald <>, Mik Freedman <github@michael-freedman.com
-    license: MIT
+    maintainer: Joe Fitzgerald <joeyfitz@gmail.com>, Mik Freedman <github@michael-freedman.com
+    license: "Apache-2.0"
     vendor: joefitzgerald
     formats:
       - apk
