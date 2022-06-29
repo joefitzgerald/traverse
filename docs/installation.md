@@ -49,7 +49,7 @@ docker pull ghcr.io/joefitzgerald/traverse
 ### One-shot container use
 
 ```bash
-docker run --rm -v "${PWD}":/workdir ghcr.io/mikfreedman/traverse [flags]
+docker run --rm -v "${PWD}":/workdir ghcr.io/joefitzgerald/traverse [flags]
 ```
 
 
